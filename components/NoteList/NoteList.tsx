@@ -2,12 +2,13 @@
 
 import css from "./NoteList.module.css";
 import NoteItem from "../NoteItem/NoteItem";
-import { Note } from "@/types/note";
-import { SearchBoxRef } from "@/components/SearchBox/SearchBox";
+import type { Note } from "@/types/note";
+import type { RefObject } from "react";
+import type { SearchBoxRef } from "@/components/SearchBox/SearchBox";
 
 export interface NoteListProps {
   notes: Note[];
-  searchRef: React.RefObject<SearchBoxRef | null>;
+  searchRef?: RefObject<SearchBoxRef | null>; 
 }
 
 export default function NoteList({ notes, searchRef }: NoteListProps) {

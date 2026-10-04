@@ -14,9 +14,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <TanStackProvider>
           <Header />
+
           {children}
+
           <Footer />
         </TanStackProvider>
+
+        {}
+        <div id="modal-root"></div>
       </body>
     </html>
   );

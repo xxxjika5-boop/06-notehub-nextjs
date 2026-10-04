@@ -7,9 +7,9 @@ import { fetchNotes } from "@/lib/api";
 export default async function NotesPage() {
   const queryClient = new QueryClient();
 
-  // Prefetch данных на сервере
+
   await queryClient.prefetchQuery({
-    queryKey: ["notes", ""], // пустой search при загрузке страницы
+    queryKey: ["notes", ""],
     queryFn: () => fetchNotes({ search: "" }),
   });
 

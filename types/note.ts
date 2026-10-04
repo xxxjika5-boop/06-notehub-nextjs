@@ -5,5 +5,12 @@ export interface Note {
   content: string;
   tag: string; 
   createdAt: string;
-  updatedAt: string;
+}
+
+export interface FetchNotesResponse {
+  notes: Note[];
+  page: number;
+  perPage: number;
+  totalPages: number;
+  totalItems: number;
 }

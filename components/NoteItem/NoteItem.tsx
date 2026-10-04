@@ -4,9 +4,9 @@ import Link from "next/link";
 import css from "./NoteItem.module.css";
 import { deleteNote } from "@/lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Note } from "@/types/note";
-import { RefObject } from "react";
-import { SearchBoxRef } from "@/components/SearchBox/SearchBox"; // важно
+import type { Note } from "@/types/note";
+import type { RefObject } from "react";
+import type { SearchBoxRef } from "@/components/SearchBox/SearchBox";
 
 type FocusableElement = HTMLInputElement | HTMLTextAreaElement | SearchBoxRef;
 
@@ -18,7 +18,7 @@ interface NoteItemProps {
 export default function NoteItem({ note, searchRef }: NoteItemProps) {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const mutation = useMutation({
     mutationFn: () => deleteNote(note.id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
@@ -38,11 +38,17 @@ export default function NoteItem({ note, searchRef }: NoteItemProps) {
         <div className={css.buttons}>
           <span className={css.tag}>{note.tag}</span>
 
+          {}
           <Link href={`/notes/${note.id}`} className={css.link}>
             View details
           </Link>
 
-          <button className={css.button} onClick={() => mutate()}>
+          {}
+          <button
+            className={css.button}
+            onClick={() => mutation.mutate()}
+            disabled={mutation.isPending}
+          >
             Delete
           </button>
         </div>
