@@ -1,5 +1,6 @@
 import axios from "axios";
-import type { Note, FetchNotesResponse } from "@/types/note";
+import type { Note } from "@/types/note";
+import type { FetchNotesResponse } from "@/types/api";
 
 const BASE_URL = "https://notehub-public.goit.study/api";
 const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
@@ -40,7 +41,8 @@ export async function createNote(
 }
 
 // Удалить заметку
-export async function deleteNote(id: string): Promise<{ success: boolean }> {
-  const response = await api.delete<{ success: boolean }>(`/notes/${id}`);
+export async function deleteNote(id: string): Promise<Note> {
+  const response = await api.delete<Note>(`/notes/${id}`);
   return response.data;
 }
+

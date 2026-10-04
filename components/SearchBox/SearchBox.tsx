@@ -32,7 +32,6 @@ const SearchBox = forwardRef<SearchBoxRef, SearchBoxProps>((props, ref) => {
   );
 });
 
-// 🔥 ВАЖНО: без этого Next.js красит forwardRef
 SearchBox.displayName = "SearchBox";
 
 export default SearchBox;
