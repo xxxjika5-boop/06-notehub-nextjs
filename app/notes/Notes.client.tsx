@@ -20,24 +20,17 @@ export default function NotesClient() {
 
   const searchRef = useRef<SearchBoxRef>(null);
 
-
   const [debouncedSearch] = useDebounce(search, 300);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["notes", page, debouncedSearch],
     queryFn: () => fetchNotes({ search: debouncedSearch, page }),
-
-
     placeholderData: (prev) => prev,
   });
-
 
   const handleSearchChange = (value: string) => {
     setSearch(value);
     setPage(1);
-
-
-    searchRef.current?.focus?.();
   };
 
   if (isLoading) return <p>Loading, please wait...</p>;

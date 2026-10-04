@@ -5,12 +5,14 @@ import css from "./NoteItem.module.css";
 import { deleteNote } from "@/lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Note } from "@/types/note";
+import type { SearchBoxRef } from "@/components/SearchBox/SearchBox";
 
 interface NoteItemProps {
   note: Note;
+  searchRef: React.RefObject<SearchBoxRef | null>;
 }
 
-export default function NoteItem({ note }: NoteItemProps) {
+export default function NoteItem({ note, searchRef }: NoteItemProps) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -30,7 +32,11 @@ export default function NoteItem({ note }: NoteItemProps) {
         <span className={css.tag}>{note.tag}</span>
 
         <div className={css.buttons}>
-          <Link href={`/notes/${note.id}`} className={css.link}>
+          <Link
+            href={`/notes/${note.id}`}
+            className={css.link}
+            onClick={() => searchRef.current?.focus()}
+          >
             View details
           </Link>
 
