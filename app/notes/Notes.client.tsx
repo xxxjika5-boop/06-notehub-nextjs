@@ -42,11 +42,13 @@ export default function NotesClient() {
         <div className={css.actions}>
           <SearchBox ref={searchRef} onChange={handleSearchChange} />
 
-          <Pagination
-            page={page}
-            totalPages={data?.totalPages ?? 1}
-            onPageChange={setPage}
-          />
+          {(data?.totalPages ?? 1) > 1 && (
+            <Pagination
+              page={page}
+              totalPages={data?.totalPages ?? 1}
+              onPageChange={setPage}
+            />
+      )}
 
           <button
             className={css.createButton}
@@ -56,7 +58,7 @@ export default function NotesClient() {
           </button>
         </div>
 
-        <NoteList notes={data?.notes ?? []} searchRef={searchRef} />
+        <NoteList notes={data?.notes ?? []} />
 
         {isModalOpen && (
           <Modal onClose={() => setIsModalOpen(false)}>
